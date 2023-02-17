@@ -14,8 +14,8 @@ import org.mariuszgromada.math.mxparser.Expression;
 public class MainActivity extends AppCompatActivity {
 
     private EditText etNum;
-    private Button btSum, btRest, btMult, btDiv, btResult;
-    private Button bt1, bt2, bt3, bt4, bt5, bt6, bt7, bt8, bt9, bt0;
+    private Button btDel,btSum, btRest, btMult, btDiv, btResult,btAC;
+    private Button bt1, bt2, bt3, bt4, bt5, bt6, bt7, bt8, bt9, bt0, btComa;
     private TextView tvResult;
     private String exp = "";
 
@@ -42,9 +42,28 @@ public class MainActivity extends AppCompatActivity {
         btRest = findViewById(R.id.btRest);
         btMult = findViewById(R.id.btMult);
         btDiv = findViewById(R.id.btDiv);
+        btDel = findViewById(R.id.btDel);
+        btAC = findViewById(R.id.btAC);
+        btComa = findViewById(R.id.btComa);
 
         tvResult = findViewById(R.id.tvResult);
 
+        btAC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                exp = "0";
+                etNum.setText(exp);
+                tvResult.setText("0");
+            }
+        });
+        btDel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Eliminar el ultimo caracter del string
+                exp = exp.substring(0, exp.length() - 1);
+                etNum.setText(exp);
+            }
+        });
         btSum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -147,6 +166,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btComa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                exp += ".";
+                etNum.setText(exp);
+            }
+        });
+
         btResult = findViewById(R.id.btResult);
 
         btResult.setOnClickListener(new View.OnClickListener(){
@@ -158,6 +185,5 @@ public class MainActivity extends AppCompatActivity {
                 tvResult.setText(result);
             }
         });
-
     }
 }
